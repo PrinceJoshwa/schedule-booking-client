@@ -10,7 +10,7 @@ import UserDetailsForm from './pages/UserDetailsForm';
 import BookingConfirmed from './pages/BookingConfirmed';
 import Scheduled from "./pages/Scheduled";
 
-const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '256166969031-807h780vuiqfp20c80pf8877i7dk6tri.apps.googleusercontent.com';
 
 function App() {
   return (
