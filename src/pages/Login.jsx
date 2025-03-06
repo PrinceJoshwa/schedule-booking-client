@@ -291,7 +291,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login failed:", error);
-      setError(error.message || "Login failed. Please try again.");
+      setError("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -301,10 +301,9 @@ function Login() {
     onSuccess: handleGoogleLogin,
     onError: (error) => {
       console.error("Google Login Failed:", error);
-      setError("Google login failed. Please try again later.");
+      setError("Google login failed. Please try again.");
     },
-    flow: 'implicit',
-    scope: 'email profile',
+    flow: 'implicit'
   });
 
   return (

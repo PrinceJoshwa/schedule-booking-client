@@ -24,37 +24,19 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://schedura-server.vercel.
 //   }
 // };
 
-const api = axios.create({
-  baseURL: API_URL,
-  timeout: 10000, // 10 second timeout
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
 export const googleAuth = async (accessToken) => {
   try {
-    const response = await api.post('/users/google', {
+    const response = await axios.post(`${API_URL}/users/google`, {
       token: accessToken
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     
     return response.data;
   } catch (error) {
-    if (error.code === 'ECONNABORTED') {
-      throw new Error('Server timeout. Please try again.');
-    }
-    
-    if (error.response) {
-      // Server responded with error
-      const message = error.response.data?.message || 'Authentication failed';
-      throw new Error(message);
-    }
-    
-    if (error.request) {
-      // Request made but no response
-      throw new Error('No response from server. Please check your connection.');
-    }
-    
-    throw new Error('Authentication failed. Please try again.');
+    console.error('Google auth error:', error);
+    throw new Error('Google authentication failed');
   }
 };
